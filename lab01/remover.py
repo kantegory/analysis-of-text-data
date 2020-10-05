@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # импортируем все зависимости
-from .parser import TextParser as TP
 import re
 
 
@@ -28,7 +27,7 @@ class PersonalDataRemover:
     self.replace_with
   """
 
-  def __init__(self, replace_with = None, data):
+  def __init__(self, replace_with = None, data = None):
     """
     Конструктор для TextParser
 
@@ -40,9 +39,7 @@ class PersonalDataRemover:
       массив строк, в которых нужно заменить ФИО
     """
 
-    self.name_pattern = re.compile(\
-      "^(((ф|Ф)(\.|\s)?(и|И)(\.|\s)?(о|О)(\.|\s)?)|(в|В)рач.*|(п|П)ациент.*|((б|Б)ольного.*))?.*",
-      "gm")
+    self.name_pattern = re.compile("((((ф|Ф).*?(и|И).*?(о|О).*?))|(в|В)рач.*|(п|П)ациент.*|((б|Б)ольного.*))")
     self.replace_with = "*" if not replace_with else replace_with
     self.data = data
 
@@ -51,8 +48,11 @@ class PersonalDataRemover:
     Функция для поиска и замены всех ФИО на *.
     """
     removed_names = []
+    result = []
 
-    for elem in data:
+    for i in range(len(self.data)):
+      elem = self.data[i]
+
       if re.match(self.name_pattern, elem):
         elem_parts = elem.split(":")
 
@@ -71,4 +71,9 @@ class PersonalDataRemover:
 
         elem = "{} {}".format(elem_parts[0], name)
 
-    return data, removed_names
+        result.append(elem)
+
+      else:
+        result.append(elem)
+
+    return result, removed_names
