@@ -56,9 +56,17 @@ class PersonalDataRemover:
       if re.match(self.name_pattern, elem):
         elem_parts = elem.split(":")
 
-        name = elem_parts[1]
+        # пытаемся выделить части
+        try:
 
-        removed_names.append(elem_parts[1])
+          name = elem_parts[1]
+
+          removed_names.append(elem_parts[1])
+
+        # если у нас не получится, то будет брошен
+        # exception IndexError, нам нужно продолжать
+        except IndexError:
+          continue
         
         # Проверяем наличие "." в имени
         if "." in name:

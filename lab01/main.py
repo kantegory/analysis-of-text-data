@@ -4,7 +4,7 @@ from remover import PersonalDataRemover as PDR
 
 
 def main():
-  filenames = ["1.txt", "2.txt", "5.txt", "6.txt"]
+  filenames = ["9.txt"]
 
   for filename in filenames:
     tp = TP(filename=filename)
