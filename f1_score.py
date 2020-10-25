@@ -20,7 +20,6 @@ class F1_score():
 
     def check(self, pred, test):
         # Проверка входных данных
-        assert np.array(self.pred, dtype=object).shape == np.array(self.test, dtype=object).shape, "prediction shape {}, test shape {}".format(str(np.array(self.pred, dtype=object).shape), str(np.array(self.test, dtype=object).shape))
         if len(np.array(self.pred, dtype=object).shape) == 1:
             self.pred = [self.pred]
         if len(np.array(self.test, dtype=object).shape) == 1:
@@ -42,12 +41,15 @@ class F1_score():
         precision = self.TP / (self.TP + self.FP)
         recall = self.TP / (self.TP + self.FN)
         
-        f1 = (2 * precision * recall) / (precision + recall)
-        return f1, precision, recall
+        if precision == recall == 0:
+            return 0
+        else:
+            f1 = (2 * precision * recall) / (precision + recall)
+            return f1
 
 
 pred = ["123", "qqqq", "ghghgh", "kkk", "111"]
-test = ["00", "bb", "ghghgh", "kkk", "111"]
+test = ["2"]
 score = F1_score(pred, test).calculate()
 print(score)
 
