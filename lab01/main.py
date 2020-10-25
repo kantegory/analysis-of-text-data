@@ -43,7 +43,7 @@ def main():
     print("Результат:\n", result)
     print("Удалённые вхождения:\n", removed)
 
-    f1 = F1(pred=removed, test=test_arr.calculate()
+    f1 = F1(pred=removed, test=test_arr).calculate()
 
     print("F-мера:\n", f1)
 

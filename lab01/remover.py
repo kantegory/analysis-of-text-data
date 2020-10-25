@@ -61,6 +61,8 @@ class PersonalDataRemover:
 
           name = elem_parts[1]
 
+          elem_parts[1] = elem_parts[1].strip()
+
           removed_names.append(elem_parts[1])
 
         # если у нас не получится, то будет брошен

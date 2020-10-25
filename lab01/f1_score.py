@@ -22,9 +22,9 @@ class F1_score():
         # Проверка входных данных
         assert np.array(self.pred, dtype=object).shape == np.array(self.test, dtype=object).shape, "prediction shape {}, test shape {}".format(str(np.array(self.pred, dtype=object).shape), str(np.array(self.test, dtype=object).shape))
         if len(np.array(self.pred, dtype=object).shape) == 1:
-            self.pred = list(self.pred)
+            self.pred = [self.pred]
         if len(np.array(self.test, dtype=object).shape) == 1:
-            self.test = list(self.test)
+            self.test = [self.test]
 
     def calculate(self):
         self.check(self.pred, self.test)
