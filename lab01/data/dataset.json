@@ -2,7 +2,7 @@
   "data": {
     "example1":
       {
-        "FIO": "Иванов Иван Иванович",
+        "FIO": ["Иванов И. И.", "Зубаненко А. А."],
         "nameOfOrganisation": "Международный диангостический центр - Санкт-Петербург",
         "numberOfOrganisation": "81299281904",
         "emailOfOrganisation": "info@idr-antni",
