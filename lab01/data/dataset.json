@@ -1,0 +1,85 @@
+{
+  "data": {
+    "example1":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "nameOfOrganisation": "Международный диангостический центр - Санкт-Петербург",
+        "numberOfOrganisation": "81299281904",
+        "emailOfOrganisation": "info@idr-antni",
+        "webSiteOfOrganisation": "http://idc-mrt.ru/",
+        "numberOfClient": "89117761840",
+        "dateOfAppeal": "22.05.2020",
+        "birthday": "22.05.2000",
+        "age": "",
+        "numberOfAppeal": "111"
+      },
+    "example2":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "numberOfOrganisation": "81299281904",
+        "nameOfOrganisation": "Международный диангостический центр - Санкт-Петербург",
+        "emailOfOrganisation": "info@idr-antni",
+        "webSiteOfOrganisation": "http://idc-mrt.ru/",
+        "numberOfClient": "89117761840",
+        "dateOfAppeal": "21.11.2019",
+        "birthday": "17.02.1956",
+        "age": "",
+        "numberOfAppeal": "222"
+      },
+      "example3":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "nameOfOrganisation": "Российская Военно-медицинская академия",
+        "numberOfOrganisation": ["542-2333", "248-3439"],
+        "emailOfOrganisation": "",
+        "webSiteOfOrganisation": "",
+        "numberOfClient": "",
+        "dateOfAppeal": "",
+        "birthday": "",
+        "age": "",
+        "numberOfAppeal": "333"
+      },
+      "example4":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "nameOfOrganisation": "Международный диангостический центр - Санкт-Петербург",
+        "numberOfOrganisation": "81299281904",
+        "emailOfOrganisation": "",
+        "webSiteOfOrganisation": "",
+        "numberOfClient": "",
+        "dateOfAppeal": "21.11.2019",
+        "birthday": "",
+        "age": "22",
+        "numberOfAppeal": ""
+      },
+      "example5":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "addressOfClient": "Ватутина 20/1",
+        "nameOfOrganisation": ["СПБ ГБУЗ Городская поликлиника №", "ООО Центр МРТ"],
+        "numberOfOrganisation": "81299281904",
+        "emailOfOrganisation": "",
+        "webSiteOfOrganisation": "",
+        "numberOfClient": "",
+        "dateOfAppeal": "21.11.2019",
+        "birthday": "",
+        "age": "22",
+        "numberOfAppeal": "555"
+      },
+      "example6":
+      {
+        "FIO": "Иванов Иван Иванович",
+        "addressOfClient": "Ватутина 20/1",
+        "nameOfOrganisation": ["СПБ ГБУЗ Городская поликлиника №", "ООО Центр МРТ"],
+        "numberOfOrganisation": "81299281904",
+        "emailOfOrganisation": "",
+        "webSiteOfOrganisation": "",
+        "numberOfClient": "",
+        "nameOfDoctor": "Иванов Иван Иванович",
+        "dateOfAppeal": "21.11.2019",
+        "birthday": "",
+        "age": "22",
+        "numberOfAppeal": "666"
+      }
+  }
+}
