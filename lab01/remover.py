@@ -96,18 +96,30 @@ class PersonalDataRemover:
         while re.search(self.email_pattern, elem) is not None:
           match = re.search(self.email_pattern, elem)[0]
           elem = re.sub(self.email_pattern, "*", elem, 1)
+
+          # удаляем лишние пробелы
+          match = match.strip()
+
           removed_names.append(match)
 
       if re.search(self.phone_pattern, elem):
         while re.search(self.phone_pattern, elem) is not None:
           match = re.search(self.phone_pattern, elem)[0]
           elem = re.sub(self.phone_pattern, "*", elem, 1)
+
+          # удаляем лишние пробелы
+          match = match.strip()
+
           removed_names.append(match)
 
       if re.search(self.url_pattern, elem):
         while re.search(self.url_pattern, elem) is not None:
           match = re.search(self.url_pattern, elem)[0]
           elem = re.sub(self.url_pattern, "*", elem, 1)
+
+          # удаляем лишние пробелы
+          match = match.strip()
+
           removed_names.append(match)
 
       for regex in self.date_pattern:
@@ -115,6 +127,10 @@ class PersonalDataRemover:
           while re.search(regex, elem) is not None:
             match = re.search(regex, elem)[0]
             elem = re.sub(regex, "*", elem, 1)
+
+            # удаляем лишние пробелы
+            match = match.strip()
+
             removed_names.append(match)
 
       if re.search(self.inn_pattern, elem):
@@ -127,12 +143,20 @@ class PersonalDataRemover:
         while re.search(self.passport_pattern, elem) is not None:
           match = re.search(self.passport_pattern, elem)[0]
           elem = re.sub(self.passport_pattern, "*", elem, 1)
+
+          # удаляем лишние пробелы
+          match = match.strip()
+
           removed_names.append(match)
 
       if re.search(self.snils_pattern, elem):
         while re.search(self.passport_pattern, elem) is not None:
           match = re.search(self.passport_pattern, elem)[0]
           elem = re.sub(self.passport_pattern, "*", elem, 1)
+
+          # удаляем лишние пробелы
+          match = match.strip()
+
           removed_names.append(match)
 
       result.append(elem)

@@ -15,25 +15,14 @@ def main():
 
   ds.close()
 
-  test_data = ds_json["data"]["example1"]
-
-  test_arr = []
-
-  for key, val in test_data.items():
-    if key == "FIO":
-      for _val in val:
-        test_arr.append(_val)
-
-  # print(test_arr)
-
-  filenames = ["11.txt"]
+  filenames = ["8.txt", "9.txt", "10.txt", "11.txt", "12.txt"]
 
   for filename in filenames:
     tp = TP(filename=filename)
 
     data = tp.parse_file()
 
-    print("Полученные текстовые данные:\n", data)
+    # print("Полученные текстовые данные:\n", data)
 
     pdr = PDR(data=data)
 
@@ -42,6 +31,10 @@ def main():
 
     print("Результат:\n", result)
     print("Удалённые вхождения:\n", removed)
+
+    test_arr = ds_json[filename]
+
+    print("Предполагаемые к удалению:\n", test_arr)
 
     f1 = F1(pred=removed, test=test_arr).calculate()
 
