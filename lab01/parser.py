@@ -5,6 +5,8 @@
 # импортируем все зависимости
 import io
 import os
+import re
+
 
 class TextParser:
   """
@@ -30,7 +32,7 @@ class TextParser:
     Парсит файл, возвращает массив строк
   """
 
-  def __init__(self, path = None, encoding = None, filename = None):
+  def __init__(self, path=None, encoding=None, filename=None):
     """
     Конструктор для TextParser
 

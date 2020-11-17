@@ -5,7 +5,7 @@
 import re
 
 
-class PersonalDataRemover:  
+class PersonalDataRemover:
   """
   Класс для удаления персональных данных в соответствии с регулярным выражением
 
@@ -27,7 +27,7 @@ class PersonalDataRemover:
     self.replace_with
   """
 
-  def __init__(self, replace_with = None, data = None):
+  def __init__(self, replace_with=None, data=None):
     """
     Конструктор для TextParser
 
@@ -40,6 +40,17 @@ class PersonalDataRemover:
     """
 
     self.name_pattern = re.compile("((((ф|Ф).*?(и|И).*?(о|О).*?))|(в|В)рач.*|(п|П)ациент.*|((б|Б)ольного.*))")
+    self.email_pattern = re.compile("([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})")
+    self.phone_pattern = re.compile("((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}")
+    self.url_pattern = re.compile("(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})")
+    self.date_pattern = [
+      re.compile("\s*(3[01]|[12][0-9]|0?[1-9])(\.|\/|\s|\-|\:)((1[012]|0?[1-9])|((я|Я)нв(ар(ь|я))?|(ф|Ф)ев(рал(ь|я))?|(м|М)ар(т|та)?|(а|А)пр(ел(ь|я))?|(м|М)а(й|я)|(и|И)юн(ь|я)?|(и|И)юл(ь|я)?|(а|А)вг(ус(т|та))?|(с|С)ен(тябр(ь|я))?|(о|О)кт(ябр(ь|я))?|(н|Н)ояб(р(ь|я))?|(д|Д)ек(абр(ь|я))?))(\.|\/|\s|\-|\:)((?:19|20)\d{2})\s*"),
+      re.compile("([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})"),
+      re.compile("\s*(3[01]|[12][0-9]|0?[1-9])(\.|\/|\s|\-|\:)((я|Я)нв(ар(ь|я))?|(ф|Ф)ев(рал(ь|я))?|(м|М)ар(т|та)?|(а|А)пр(ел(ь|я))?|(м|М)а(й|я)|(и|И)юн(ь|я)?|(и|И)юл(ь|я)?|(а|А)вг(ус(т|та))?|(с|С)ен(тябр(ь|я))?|(о|О)кт(ябр(ь|я))?|(н|Н)ояб(р(ь|я))?|(д|Д)ек(абр(ь|я))?)")
+    ]
+    self.inn_pattern = re.compile("(?<=(ИНН))((\s)?\:(\s)?|(\s)?\-(\s)?|(\s))(\d{12})")
+    self.snils_pattern = re.compile("(?<=(СНИЛС))((\s)?\:(\s)?|(\s)?\-(\s)?|(\s)|(\s|\:|\-){0,2}?\№(\s|\:|\-){0,2}?)(\d{3}\-\d{3}\-\d{3}\-\d{2})")
+    self.passport_pattern = re.compile("(((П|п)аспорт(а)?))((\s)?\:(\s)?|(\s)?\-(\s)?|(\s)|(\s|\:|\-){0,2}?\№(\s|\:|\-){0,2}?)(\d{2}(\s)?\d{2}(\s)?\d{6})")
     self.replace_with = "*" if not replace_with else replace_with
     self.data = data
 
@@ -69,7 +80,7 @@ class PersonalDataRemover:
         # exception IndexError, нам нужно продолжать
         except IndexError:
           continue
-        
+
         # Проверяем наличие "." в имени
         if "." in name:
           name = name.split(".")
@@ -81,9 +92,49 @@ class PersonalDataRemover:
 
         elem = "{} {}".format(elem_parts[0], name)
 
-        result.append(elem)
+      if re.search(self.email_pattern, elem):
+        while re.search(self.email_pattern, elem) is not None:
+          match = re.search(self.email_pattern, elem)[0]
+          elem = re.sub(self.email_pattern, "*", elem, 1)
+          removed_names.append(match)
 
-      else:
-        result.append(elem)
+      if re.search(self.phone_pattern, elem):
+        while re.search(self.phone_pattern, elem) is not None:
+          match = re.search(self.phone_pattern, elem)[0]
+          elem = re.sub(self.phone_pattern, "*", elem, 1)
+          removed_names.append(match)
+
+      if re.search(self.url_pattern, elem):
+        while re.search(self.url_pattern, elem) is not None:
+          match = re.search(self.url_pattern, elem)[0]
+          elem = re.sub(self.url_pattern, "*", elem, 1)
+          removed_names.append(match)
+
+      for regex in self.date_pattern:
+        if re.search(regex, elem):
+          while re.search(regex, elem) is not None:
+            match = re.search(regex, elem)[0]
+            elem = re.sub(regex, "*", elem, 1)
+            removed_names.append(match)
+
+      if re.search(self.inn_pattern, elem):
+        while re.search(self.inn_pattern, elem) is not None:
+          match = re.search(self.inn_pattern, elem)[0]
+          elem = re.sub(self.inn_pattern, "*", elem, 1)
+          removed_names.append(match)
+
+      if re.search(self.passport_pattern, elem):
+        while re.search(self.passport_pattern, elem) is not None:
+          match = re.search(self.passport_pattern, elem)[0]
+          elem = re.sub(self.passport_pattern, "*", elem, 1)
+          removed_names.append(match)
+
+      if re.search(self.snils_pattern, elem):
+        while re.search(self.passport_pattern, elem) is not None:
+          match = re.search(self.passport_pattern, elem)[0]
+          elem = re.sub(self.passport_pattern, "*", elem, 1)
+          removed_names.append(match)
+
+      result.append(elem)
 
     return result, removed_names

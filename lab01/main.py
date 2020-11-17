@@ -26,7 +26,7 @@ def main():
 
   # print(test_arr)
 
-  filenames = ["1.txt"]
+  filenames = ["11.txt"]
 
   for filename in filenames:
     tp = TP(filename=filename)
