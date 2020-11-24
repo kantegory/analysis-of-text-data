@@ -86,5 +86,6 @@ class TextParser:
 
     # получаем массив строк по переносам
     data = data.split("\n")
+    s = " ".join(data)
 
-    return data
+    return s
