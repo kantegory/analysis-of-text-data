@@ -16,44 +16,36 @@ def main():
 
   ds.close()
 
-  # test_data = ds_json["data"]["example1"]
-
   test_arr = []
 
-  # for key, val in test_data.items():
-  #   if key == "FIO":
-  #     for _val in val:
-  #       test_arr.append(_val)
+  # filenames = [os.path.join(os.getcwd(), "data", "dataset2.txt")]
 
-  # print(test_arr)
+  # массив файлов, которые мы хотим обработать
+  filenames = ["8.txt"] 
 
-  filenames = [os.path.join(os.getcwd(), "data" , "dataset2.txt")]
-
-  # filenames = ["8.txt", "9.txt", "10.txt", "11.txt", "12.txt"]
-
+  # проходимся по массиву, парсим каждый из файлов
   for filename in filenames:
     tp = TP(filename=filename)
 
+    # записываем всё в переменную
     data = tp.parse_file()
 
-    # print("Полученные текстовые данные:\n", data)
-
+    # прогоняем алгоритм по замене персональных данных на *
     pdr = PDR(data=data)
 
+    # выписываем полученный результат и удалённые вхождения
     result, removed = pdr.find_and_replace()
 
-
     print("Результат:\n", result)
-    # with open("ans.txt", 'w') as file:
-    #   for line in result:
-    #     txt_file.write(" ".join(line) + "\n")  # works with any number of elements in a line
+
+    # записываем результат в файл
+    result_file = open("result.txt", "w")
+    result_file.write(result[0])
+    result_file.close()
 
     print("Удалённые вхождения:\n", removed)
 
-    # test_arr = ds_json[filename]
-
-    print("Предполагаемые к удалению:\n", [])
-
+    # считаем F-меру
     f1 = F1(pred=removed, test=['test']).calculate()
 
     print("F-мера:\n", f1)
